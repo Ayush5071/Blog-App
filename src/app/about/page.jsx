@@ -6,7 +6,6 @@ export const metadata = {
   description: "About description",
 };
 
-
 const AboutPage = () => {
 
   return (
