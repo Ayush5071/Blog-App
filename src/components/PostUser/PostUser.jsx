@@ -1,14 +1,13 @@
+import { getUser } from "@/lib/data";
 import styles from "./postUser.module.css";
-const getData = async(slug) => {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${slug}`);
-    return res.json();
-}
+
 const PostUser = async({userid}) => {
-    const user = await getData(userid);
+    const user = await getUser(userid);
+    console.log(user)
   return (
   <div className={styles.container}>
     <span className={styles.title}>Name</span>
-    <span className={styles.username}>{user.name}</span>
+    <span className={styles.username}>{user.username}</span>
   </div>
   )
 }

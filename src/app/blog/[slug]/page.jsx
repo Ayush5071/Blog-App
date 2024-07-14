@@ -2,19 +2,25 @@ import React, { Suspense } from 'react'
 import Image from 'next/image'
 import styles from "./singlePost.module.css"
 import PostUser from '@/components/postuser/PostUser'
+import { getPost} from '@/lib/data'
 
-//fetch data using an api
-const getData = async(slug) => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`,{next:{revalidate:3600}}); // refreshing the data after 3600s every time
-  if(!res.ok){
-    throw new Error('Soemthing went wrong');
+export const generateMetadata = async({params}) =>{
+  const {slug} = params;
+  
+  const post = await getPost(slug);
+  
+  return{
+    title:post.title,
+    description:post.desc
   }
-  return res.json();
 }
 
 const page = async({params}) => {
+  console.log("params :", params);
   const {slug} = params;
-  const post = await getData(slug);
+  console.log(slug);
+  const post = await getPost(slug);
+  console.log(post)
   return (
     <div className={styles.container} >
       <div className={styles.imgContainer}>
@@ -34,7 +40,7 @@ const page = async({params}) => {
         </div>
         </div>
         <div className={styles.content}>
-          {post.body}
+          {post.desc}
         </div>
       </div>
     </div>
