@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import Image from 'next/image'
 import styles from "./singlePost.module.css"
 import PostUser from '@/components/postuser/PostUser'
-import { getPost} from '@/lib/data'
+// import { getPost} from '@/lib/data'
 
 export const generateMetadata = async({params}) =>{
   const {slug} = params;
@@ -12,15 +12,28 @@ export const generateMetadata = async({params}) =>{
   return{
     title:post.title,
     description:post.desc
+
   }
 }
 
+const getPost = async(slug) => {
+try {
+    const post = await fetch(`http://localhost:3000/api/blog/${slug}`);
+    return post;
+} catch (error) {
+  console.log(error);
+  throw new Error("Error fetching single post");
+}
+}
+
 const page = async({params}) => {
-  console.log("params :", params);
+  // console.log("params :", params);
   const {slug} = params;
-  console.log(slug);
+  // console.log(slug);
   const post = await getPost(slug);
-  console.log(post)
+  console.log("Slug ---",slug);
+  console.log("Params",params);
+  // console.log(post)
   return (
     <div className={styles.container} >
       <div className={styles.imgContainer}>
