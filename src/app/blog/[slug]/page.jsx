@@ -19,7 +19,7 @@ export const generateMetadata = async({params}) =>{
 const getPost = async(slug) => {
 try {
     const post = await fetch(`http://localhost:3000/api/blog/${slug}`);
-    return post;
+    return post.json();
 } catch (error) {
   console.log(error);
   throw new Error("Error fetching single post");
@@ -33,6 +33,7 @@ const page = async({params}) => {
   const post = await getPost(slug);
   console.log("Slug ---",slug);
   console.log("Params",params);
+  console.log("Post ----->",post)
   // console.log(post)
   return (
     <div className={styles.container} >

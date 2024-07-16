@@ -15,8 +15,7 @@ const userSchema = new Schema({
     },
     password:{
         type:String,
-        required:true,
-        min:6,
+
     },
     img:{
         type:String
@@ -55,5 +54,5 @@ const postSchema = new Schema({
     timestamps:true
 })
 
-export const User = models.User || model("User",userSchema);
-export const Post = models.Post || model("Post",postSchema);
+export const User = models?.User || model("User",userSchema);
+export const Post = models?.Post || model("Post",postSchema);
