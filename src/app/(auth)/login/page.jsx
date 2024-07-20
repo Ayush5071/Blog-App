@@ -1,21 +1,19 @@
-"use server"
-import { handleGithubLogin } from '@/lib/actions';
-import { auth, signIn } from '@/lib/auth'
-import React from 'react'
+import { handleGithubLogin } from "@/lib/actions";
+import styles from "./login.module.css";
+import LoginForm from "@/components/loginForm/loginForm";
 
-const LoginPage = async () => {
-  const session = await auth();
-  console.log("yo hai kya re ",session)
-
-
+const LoginPage = () => {
 
   return (
-    <div>
-      <form action={handleGithubLogin}>
-      <button>Github Login</button>
-      </form>
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+        <form className={styles.form} action={handleGithubLogin}>
+          <button className={styles.github}>Login with Github</button>
+        </form>
+        <LoginForm/>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;
